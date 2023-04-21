@@ -8,7 +8,7 @@ WORKDIR /tmp/
 RUN mvn clean package
 
 # run stage
-FROM java:8-jre-alpine
+FROM openjdk:8-jre-alpine
 LABEL maintainer="sylwek.sokolowski@gmail.com"
 
 ARG BUILD_DATE
@@ -25,7 +25,7 @@ LABEL org.label-schema.vcs-url="https://github.com/slydeveloper/spring-boot-admi
 LABEL org.label-schema.vcs-ref=$VCS_REF
 LABEL org.label-schema.vendor="Sylwester Sokolowski"
 LABEL org.label-schema.version=$BUILD_VERSION
-LABEL org.label-schema.docker.cmd="docker run -d -p 1111:1111 --name spring-boot-admin slydeveloper/spring-boot-admin"
+LABEL org.label-schema.docker.cmd="docker run -d -p 1111:1111 --name spring-boot-admin kkamenev/spring-boot-admin"
 
 RUN apk add --no-cache curl
 COPY --from=build-stage /tmp/target/*.jar /opt/spring-boot-admin-docker/app.jar
